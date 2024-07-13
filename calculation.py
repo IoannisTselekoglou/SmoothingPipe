@@ -3,7 +3,8 @@ class Smootherpipe:
     def __init__(self):
         pass
 
-    def kernel2D(self, actual_index, array_input, size : int): 
+    @staticmethod
+    def kernel2D(actual_index, array_input, size : int): 
 
         #middle_point = round.(len(array_input)/2)
         half_kernel = int((size - 1)/2)
@@ -22,11 +23,18 @@ class Smootherpipe:
         #devide by size of kernel not array
         return sum_window / size
 
-    def convolution2D(self, input_array, kernel_size):
+    @staticmethod
+    def convolution2D(input_array, kernel_size):
         result = []    
         for i in range(len(input_array)):
-            result.append(self.kernel2D(i, input_array, kernel_size))
+            result.append(Smootherpipe.kernel2D(i, input_array, kernel_size))
         #print(f"LENGTH INPUT ARRAY: {len(input_array)}  LENGTH SMOOTHED ARRAY: {len(result)}")
         return result 
 
-    
+    ##non static way to create function with self
+    #def convolution2D(self, input_array, kernel_size):
+    #    result = []    
+    #    for i in range(len(input_array)):
+    #        result.append(self.kernel2D(i, input_array, kernel_size))
+    #    #print(f"LENGTH INPUT ARRAY: {len(input_array)}  LENGTH SMOOTHED ARRAY: {len(result)}")
+    #    return result 
